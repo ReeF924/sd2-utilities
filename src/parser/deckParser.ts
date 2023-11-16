@@ -87,34 +87,37 @@ export class DeckParser{
 }
 
 declare type DeckDataRaw = {
-income: number;
-division: number;
-cardCount: number;
-units: UnitRaw[];
-code: string;
-}
-
+  income: number;
+  division: number;
+  cardCount: number;
+  units: UnitRaw[];
+  code: string;
+};
 declare type UnitRaw = {
-id: number;
-transportid: number;
-xp: number;
-phase: number;
-count: number;
-}
-
+  id: number;
+  transportid: number;
+  xp: number;
+  phase: number;
+  count: number;
+};
 export declare type DeckData = {
   income: string;
   division: string;
   franchise: "WARNO" | "SD2";
   units: Unit[];
   raw: DeckDataRaw;
-}
-
+};
+export declare type StoredDeckData = {
+  income: number;
+  division: number;
+  code: string;
+};
 declare type Unit = {
-  xp:number;
-  phase:number;
+  xp: number;
+  phase: number;
   count: number;
   name: string;
   transport: string;
-  raw:UnitRaw;
-}
+  raw: UnitRaw;
+};
+export{};

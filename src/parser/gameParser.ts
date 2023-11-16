@@ -1,9 +1,10 @@
 //import { start } from 'node:repl';
-import { DeckData, DeckParser } from './deckParser'
+import {DeckData, StoredDeckData, DeckParser } from './deckParser'
 
 
 export class GameParser {
     static parseRaw(gameData:Buffer):RawGameData{
+        console.log('inParseRaw');
         //figure out junk length:
         //const junk = gameData.toString().split("{\"game\":")[0].length
         const junk = gameData.indexOf("{\"game\":")
@@ -21,7 +22,6 @@ export class GameParser {
         startData.result = endData.result;
         //clean and make return
         const ret = new RawGameData();
-
         ret.gameMode = Number(startData.game.GameMode)
         ret.isNetworkMode = Boolean(startData.game.IsNetworkMode)
         ret.maxPlayers = Number(startData.game.NbMaxPlayer)
@@ -75,6 +75,36 @@ export class GameParser {
         }
         return ret;
     }
+}
+
+export declare class StoredGameData {
+    id: string;
+    version: number;
+    gameType: number;
+    map_raw: string;
+    timeLimit: number;
+    scoreLimit: number;
+    victoryCondition: number;
+    players: {
+        winner: StoredPlayerData;
+        loser: StoredPlayerData;
+    };
+    result: {
+        duration: number;
+        victory: number;
+        score: number;
+    };
+}
+export declare class StoredPlayerData {
+    id: number;
+    alliance: number;
+    elo: number;
+    level: number;
+    name: string;
+    deckCode?: StoredDeckData;
+    scoreLimit: number;
+    incomeRate: number;
+    mapPos: string;
 }
 
 //mod list/support is not supported atm.
